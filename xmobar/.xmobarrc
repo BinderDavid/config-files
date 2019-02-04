@@ -1,0 +1,26 @@
+Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+        , lowerOnStart = False
+	, overrideRedirect = False
+	, hideOnStart  = False
+        , allDesktops  = True
+        , persistent   = True
+        , borderColor = "black"
+        , border = TopB
+        , bgColor = "black"
+        , fgColor = "grey"
+        , position = TopW L 100
+	-- command Syntax:
+	-- Run 'Pluginname' 'alias' 'options...'
+        , commands = [    Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 10
+                        , Run Network "eth1" ["-L","0","-H","32","--normal","green","--high","red"] 10
+                        , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                        , Run Memory ["-t","Mem: <usedratio>%"] 10
+                        , Run Swap [] 10
+                        , Run Com "uname" ["-s","-r"] "" 36000
+                        , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                        , Run StdinReader
+                        ]
+        , sepChar = "%"   -- Char used for indicating commands in the output template
+        , alignSep = "}{" -- left of "}" will be left aligned, between "}" and "{" will be centered ...
+        , template = "%StdinReader% | %cpu% | %memory% * %swap% | %eth0% - %eth1% }{<fc=#ee9a00>%date%</fc> | %uname% "
+        }
