@@ -18,7 +18,7 @@
 ;; Color Theme
 ;; -----------------------------------------------------------------------------
 
-(load-theme 'dichromacy t)
+(load-theme 'zenburn t)
 
 ;; -----------------------------------------------------------------------------
 ;; Line Numbering
@@ -109,18 +109,28 @@
 ;;; ----------------------------------------------------------------------------
 
 ;; -----------------------------------------------------------------------------
+;; Language Server Protocol
+;; -----------------------------------------------------------------------------
+;(require 'haskell-mode)
+(require 'lsp-mode)
+(require 'lsp-ui)
+(require 'lsp)
+(require 'lsp-haskell)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+(add-hook 'haskell-mode-hook #'lsp)
+;; -----------------------------------------------------------------------------
 ;; Haskell
 ;; -----------------------------------------------------------------------------
 
 ;; Haskell Mode
 
-(require 'haskell-mode)
-(require 'haskell-interactive-mode)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+;; (require 'haskell-mode)
+;; (require 'haskell-interactive-mode)
+;; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
-;; Liquid Haskell
+;; ;; Liquid Haskell
 
-(add-to-list 'load-path (expand-file-name "liquid-tip.el/" user-emacs-directory))
+;; (add-to-list 'load-path (expand-file-name "liquid-tip.el/" user-emacs-directory))
 
 ;; Configure flycheck-liquidhs, if you haven't already
 ;(add-hook 'haskell-mode-hook
