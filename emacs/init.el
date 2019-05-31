@@ -9,16 +9,44 @@
 ;; -----------------------------------------------------------------------------
 ;; Melpa Configuration
 ;; -----------------------------------------------------------------------------
-
+;;; Code:
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+
+
+;; -----------------------------------------------------------------------------
+;; Org-mode configuration
+;; -----------------------------------------------------------------------------
+
+(require 'org)
+(setq org-log-done t) ; Append date to TODO item when closed
+(setq org-latex-packages-alist
+      '(("" "bussproofs" t)))
+      
+(setq org-todo-keywords
+      '((sequence "TODO" "IN-PROGRESS" "DONE")))
+(setq org-format-latex-options
+      (plist-put org-format-latex-options :scale 1.5)) ; Latex preview size
 
 ;; -----------------------------------------------------------------------------
 ;; Color Theme
 ;; -----------------------------------------------------------------------------
 
 (load-theme 'zenburn t)
+
+;; -----------------------------------------------------------------------------
+;; Save newlines at end of files
+;; -----------------------------------------------------------------------------
+
+(setq require-final-newline 'visit-save)
+
+;; -----------------------------------------------------------------------------
+;; Disable Backup files (*~ and *#). I version all files with git.
+;; -----------------------------------------------------------------------------
+
+(setq make-backup-files nil) ; No *~ files.
+(setq auto-save-default nil) ; No *# files.
 
 ;; -----------------------------------------------------------------------------
 ;; Line Numbering
@@ -152,22 +180,22 @@
 ;; OCaml Mode
 ;;----------------------------------
 ;; Tuareg
-(load "~/ocaml/tuareg/tuareg-site-file")
-(dolist
-   (var (car (read-from-string
-	      (shell-command-to-string "opam config env --sexp"))))
-  ;; Merlin
-  (setenv (car var) (cadr var)))
-(let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
-  (when (and opam-share (file-directory-p opam-share))                                                                                             
-    ;; Register Merlin
-    (add-to-list 'load-path (expand-file-name "emacs/site-lisp" opam-share))
-    (autoload 'merlin-mode "merlin" nil t nil)
-    ;; Automatically start it in OCaml buffers
-    (add-hook 'tuareg-mode-hook 'merlin-mode t)
-    (add-hook 'caml-mode-hook 'merlin-mode t)
-    ;; Use opam switch to lookup ocamlmerlin binary
-    (setq merlin-command 'opam)))
+;; (load "~/ocaml/tuareg/tuareg-site-file")
+;; (dolist
+;;    (var (car (read-from-string
+;; 	      (shell-command-to-string "opam config env --sexp"))))
+;;   ;; Merlin
+;;   (setenv (car var) (cadr var)))
+;; (let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
+;;   (when (and opam-share (file-directory-p opam-share))                                                                                             
+;;     ;; Register Merlin
+;;     (add-to-list 'load-path (expand-file-name "emacs/site-lisp" opam-share))
+;;     (autoload 'merlin-mode "merlin" nil t nil)
+;;     ;; Automatically start it in OCaml buffers
+;;     (add-hook 'tuareg-mode-hook 'merlin-mode t)
+;;     (add-hook 'caml-mode-hook 'merlin-mode t)
+;;     ;; Use opam switch to lookup ocamlmerlin binary
+;;     (setq merlin-command 'opam)))
 
 ;; -----------------------------------------------------------------------------
 ;; Idris
