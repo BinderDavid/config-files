@@ -144,8 +144,20 @@
 (require 'lsp-ui)
 (require 'lsp)
 (require 'lsp-haskell)
+(require 'company-lsp)
+(push 'company-lsp company-backends)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (add-hook 'haskell-mode-hook #'lsp)
+
+
+;; -----------------------------------------------------------------------------
+;; Yaml-Mode
+;; -----------------------------------------------------------------------------
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist
+	     '("\\.yml\\'" . yaml-mode))
+	     
 ;; -----------------------------------------------------------------------------
 ;; Haskell
 ;; -----------------------------------------------------------------------------
