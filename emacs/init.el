@@ -16,6 +16,12 @@
 
 
 ;; -----------------------------------------------------------------------------
+;; Enabling advanced commands
+;; -----------------------------------------------------------------------------
+
+(put 'narrow-to-region 'disabled nil) ; Enable narrowing
+
+;; -----------------------------------------------------------------------------
 ;; Org-mode configuration
 ;; -----------------------------------------------------------------------------
 
@@ -137,18 +143,17 @@
 ;;; ----------------------------------------------------------------------------
 
 ;; -----------------------------------------------------------------------------
-;; Language Server Protocol
+;; Language Server Protocol (LSP)
 ;; -----------------------------------------------------------------------------
-;(require 'haskell-mode)
+
 (require 'lsp-mode)
-(require 'lsp-ui)
 (require 'lsp)
+(require 'lsp-ui)
 (require 'lsp-haskell)
 (require 'company-lsp)
 (push 'company-lsp company-backends)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-(add-hook 'haskell-mode-hook #'lsp)
-
+(setq lsp-enable-snippet nil)
 
 ;; -----------------------------------------------------------------------------
 ;; Yaml-Mode
@@ -161,6 +166,12 @@
 ;; -----------------------------------------------------------------------------
 ;; Haskell
 ;; -----------------------------------------------------------------------------
+
+(require 'lsp-haskell)
+(require 'haskell-interactive-mode)
+(add-hook 'haskell-mode-hook
+	  #'lsp
+	  'interactive-haskell-mode)
 
 ;; Haskell Mode
 
