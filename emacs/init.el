@@ -254,8 +254,9 @@
 ;; -----------------------------------------------------------------------------
 
 ;; Proof General
+(require 'proof-site)
+(proof-ready-for-assistant 'coq)
 
-(load "~/.emacs.d/lisp/PG/generic/proof-site")
 (setq proof-splash-enable nil)
 (setq proof-electric-terminator-enable nil)
 (setq proof-next-command-insert-space nil)
