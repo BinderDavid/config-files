@@ -202,6 +202,7 @@ myManageHook = manageDocks <+> manageHook def
 ------------------------------------------------------------------------
 myEventHook :: Event -> X All
 myEventHook = fullscreenEventHook --Fixes Fullscreen from browser
+              <+> docksEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
