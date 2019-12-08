@@ -37,6 +37,9 @@
 ;; -----------------------------------------------------------------------------
 ;; Color Theme
 ;; -----------------------------------------------------------------------------
+(unless (package-installed-p 'zenburn-theme)
+  (package-refresh-contents)
+  (package-install 'zenburn-theme))
 
 (load-theme 'zenburn t)
 
@@ -100,6 +103,10 @@
 ;; Neotree Configuration (Browsing directories)
 ;; -----------------------------------------------------------------------------
 
+(unless (package-installed-p 'neotree)
+  (package-refresh-contents)
+  (package-install 'neotree))
+
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle) ; With <F8> toggle the file browser
 (setq neo-theme 'ascii)               ; Set style of the tree to ascii signs
@@ -129,6 +136,9 @@
 ;; -----------------------------------------------------------------------------
 ;; Flycheck Config
 ;; -----------------------------------------------------------------------------
+(unless (package-installed-p 'flycheck)
+  (package-refresh-contents)
+  (package-install 'flycheck))
 
 (require 'flycheck)
 (global-flycheck-mode)                     ; Global Flycheck
@@ -150,6 +160,16 @@
 ;; Language Server Protocol (LSP)
 ;; -----------------------------------------------------------------------------
 
+(unless (package-installed-p 'lsp-ui)
+  (package-refresh-contents)
+  (package-install 'lsp-ui))
+(unless (package-installed-p 'lsp-haskell)
+  (package-refresh-contents)
+  (package-install 'lsp-haskell))
+(unless (package-installed-p 'company-lsp)
+  (package-refresh-contents)
+  (package-install 'company-lsp))
+
 (require 'lsp-mode)
 (require 'lsp)
 (require 'lsp-ui)
@@ -162,6 +182,10 @@
 ;; -----------------------------------------------------------------------------
 ;; Yaml-Mode
 ;; -----------------------------------------------------------------------------
+
+(unless (package-installed-p 'yaml-mode)
+  (package-refresh-contents)
+  (package-install 'yaml-mode))
 
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist
@@ -257,6 +281,10 @@
 ;; Coq
 ;; -----------------------------------------------------------------------------
 
+(unless (package-installed-p 'proof-general)
+  (package-refresh-contents)
+  (package-install 'proof-general))
+
 ;; Proof General
 (require 'proof-site)
 (proof-ready-for-assistant 'coq)
@@ -282,8 +310,8 @@
 ;; Agda
 ;; -----------------------------------------------------------------------------
 
-(load-file (let ((coding-system-for-read 'utf-8))
-	     (shell-command-to-string "agda-mode locate")))
+;; (load-file (let ((coding-system-for-read 'utf-8))
+;; 	     (shell-command-to-string "agda-mode locate")))
 
 ;; -----------------------------------------------------------------------------
 ;; Elisp
@@ -296,9 +324,9 @@
 ;; Cubical Type Theory (CTT)
 ;; -----------------------------------------------------------------------------
 
-(load-file "~/GitRepos/cubicaltt/cubicaltt.el")
-(autoload 'cubicaltt-mode "cubicaltt" "cubical editing mode" t)
-(setq auto-mode-alist (append auto-mode-alist '(("\\.ctt$" . cubicaltt-mode))))
+;; (load-file "~/GitRepos/cubicaltt/cubicaltt.el")
+;; (autoload 'cubicaltt-mode "cubicaltt" "cubical editing mode" t)
+;; (setq auto-mode-alist (append auto-mode-alist '(("\\.ctt$" . cubicaltt-mode))))
 
 ;; -----------------------------------------------------------------------------
 ;; Uroboro
